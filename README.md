@@ -1,4 +1,4 @@
-# crytomator
+# Synology-Crytomator
 
 Mount Cryptomator directly in your Synology NAS.
 The files will be accessible via WebDav protocol.
@@ -33,6 +33,7 @@ In your WebDav client (guest account, no username/password)
 (Assuming 192.168.20.200 is your NAS IP)
 
 You can also mount WebDav as remote connect in synology file station.
+
 [File Station] -> [Tools] -> [Remote Connection] -> [Connection Setup] -> [WebDav]
 
 Hostname will be 'localhost' or '127.0.0.1'
