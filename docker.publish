@@ -1,0 +1,36 @@
+docker build -t example_image .
+
+
+docker tag example_image:latest vh13294/cryptomator-synology:latest
+
+
+docker push vh13294/cryptomator-synology:latest
+
+Instead of 
+    https://hub.docker.com/repository/docker/vh13294/cryptomator-synology
+
+Use In NAS Docker image URL
+    https://hub.docker.com/r/vh13294/cryptomator-synology
+
+
+In NAS
+- Volume
+    + Folder        dataDump
+    + MountPath     /dataDump
+
+- Port Setting
+    + Local         8181
+    + Container     8181
+    
+- Environment
+    + TIMEOUT:          2h
+    + VAULT_NAME:       demoVault
+    + VAULT_PATH:       /path/to/vault
+    + VAULT_PASS:       Password
+    + CRYPTOMATOR_PORT: 8181
+
+
+
+In your network
+- Mounted URL:
+    + 192.168.20.251:8181/demoVault
