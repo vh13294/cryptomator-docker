@@ -1,4 +1,4 @@
-# crytomator
+# Cryptomator
 
 Mount Cryptomator directly in your Synology NAS.
 The files will be accessible via WebDav protocol.
@@ -10,20 +10,18 @@ In Synology NAS
 
 - Volume
 
-  - Folder: cryptomatorDir
-  - MountPath: /cryptomatorDir
+  - Folder: cryptomatorDir -> MountPath: /cryptomatorDir
 
 - Port Setting
 
-  - Local: 8181
-  - Container: 80
+  - Local: 8181 -> Container: 8181
 
 - Environment
   - TIMEOUT: 2h (server will shutdown after 2h of running)
   - VAULT_NAME: demoVault
   - VAULT_PATH: /cryptomatorDir
   - VAULT_PASS: password
-  - CRYPTOMATOR_PORT: 80
+  - CRYPTOMATOR_PORT: 8181
 
 In your WebDav client (guest account, no username/password)
 
@@ -33,6 +31,7 @@ In your WebDav client (guest account, no username/password)
 (Assuming 192.168.20.200 is your NAS IP)
 
 You can also mount WebDav as remote connect in synology file station.
+
 [File Station] -> [Tools] -> [Remote Connection] -> [Connection Setup] -> [WebDav]
 
 Hostname will be 'localhost' or '127.0.0.1'

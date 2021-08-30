@@ -1,10 +1,18 @@
-FROM ubuntu:latest
+FROM debian:latest
 
 # Installing dependencies
-RUN apt-get update && apt-get install -y default-jdk
+RUN apt-get update && apt-get install -y default-jre
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+ENV TIMEOUT 2h
+ENV VAULT_NAME demoVault
+ENV VAULT_PATH /cryptomatorDir
+ENV VAULT_PASS password
+ENV CRYPTOMATOR_PORT 8181
+
+EXPOSE 8181
 
 COPY cryptomator-cli-0.4.0.jar /usr/local/bin/cryptomator-cli.jar
 
