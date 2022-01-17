@@ -1,3 +1,5 @@
+# JDK could bloat the image size, only need JRE
+# FROM openjdk:19-jdk
 FROM openjdk:11-jre-slim
 
 ENV TIMEOUT 2h
@@ -8,7 +10,7 @@ ENV CRYPTOMATOR_PORT 8181
 
 EXPOSE 8181
 
-COPY cryptomator-cli-0.4.0.jar /usr/local/bin/cryptomator-cli.jar
+COPY cryptomator-cli-0.5.1.jar /usr/local/bin/cryptomator-cli.jar
 
 COPY boot.sh /usr/local/bin/boot.sh
 # change permission

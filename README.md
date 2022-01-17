@@ -3,6 +3,9 @@
 Mount Cryptomator directly in your Synology NAS.
 The files will be accessible via WebDav protocol.
 
+- cryptomator-synology:vault-format-8
+- cryptomator-synology:vault-format-7
+
 Docker Hub:
 https://hub.docker.com/r/vh13294/cryptomator-synology
 

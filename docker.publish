@@ -2,6 +2,10 @@ docker build -t example_image .
 
 
 docker tag example_image:latest vh13294/cryptomator-synology:latest
+docker tag example_image:latest vh13294/cryptomator-synology:vault-format-8
+docker tag example_image:latest vh13294/cryptomator-synology:vault-format-7
 
 
 docker push vh13294/cryptomator-synology:latest
+docker push vh13294/cryptomator-synology:vault-format-8
+docker push vh13294/cryptomator-synology:vault-format-7
