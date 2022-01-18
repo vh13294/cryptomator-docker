@@ -1,6 +1,7 @@
-# JDK could bloat the image size, only need JRE
-# FROM openjdk:19-jdk
-FROM openjdk:11-jre-slim
+FROM openjdk:17-slim
+# FROM openjdk:11-jre-slim
+# JDK could bloat the image size, only need JRE. But there is no 17-jre build
+
 
 ENV TIMEOUT 2h
 ENV VAULT_NAME demoVault
