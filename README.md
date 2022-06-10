@@ -21,6 +21,7 @@ In Synology NAS
 
 - Environment
   - TIMEOUT: 2h (server will shutdown after 2h of running)
+  - TIMEOUT: 0 (disable timeout and server will run indefinitely)
   - VAULT_NAME: demoVault
   - VAULT_PATH: /cryptomatorDir
   - VAULT_PASS: password
