@@ -3,7 +3,9 @@ services:
     build: .
     environment:
       TIMEOUT: "2h"
-      VAULT_PATH: "demoVault"
+      VAULT_PATH: "/home/demoVault"
       VAULT_PASS: "A1b2c3d4"
     ports:
-      - "8181:8181"
+      - "8181:8080"
+    volumes:
+      - "./demoVault:/home/demoVault" 
