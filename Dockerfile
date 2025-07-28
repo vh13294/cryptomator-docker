@@ -2,7 +2,9 @@ FROM debian:stable-slim
 
 ENV TIMEOUT 2h
 ENV VAULT_PATH /cryptomatorDir
+ENV VAULT_NAME demoVault
 ENV VAULT_PASS password
+ENV VAULT_PORT 8181
 
 RUN apt-get update --fix-missing && \
     apt-get install -y --no-install-recommends \
@@ -39,6 +41,8 @@ RUN case "${TARGETARCH}" in \
 COPY ./boot.sh /usr/local/bin/boot.sh
 # change permission
 RUN chmod +x /usr/local/bin/boot.sh
+
+EXPOSE ${VAULT_PORT}
 
 # run at startup
 CMD timeout $TIMEOUT /usr/local/bin/boot.sh

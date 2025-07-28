@@ -4,8 +4,10 @@ services:
     environment:
       TIMEOUT: "2h"
       VAULT_PATH: "/home/demoVault"
+      VAULT_NAME: "demoVault"
       VAULT_PASS: "A1b2c3d4"
+      VAULT_PORT: "8181"
     ports:
-      - "8181:8080"
+      - "0.0.0.0:8181:8181"
     volumes:
       - "./demoVault:/home/demoVault" 
