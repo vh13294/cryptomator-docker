@@ -1,41 +1,54 @@
 # Synology-Cryptomator
 
-Mount Cryptomator directly in your Synology NAS.
-The files will be accessible via WebDav protocol.
+Mount a Cryptomator vault directly on your Synology NAS and access it over WebDAV.
 
-- cryptomator-synology:vault-format-8
-- cryptomator-synology:vault-format-7
+[![Docker Hub](https://img.shields.io/docker/pulls/vh13294/cryptomator-synology)](https://hub.docker.com/r/vh13294/cryptomator-synology)
 
-Docker Hub:
-https://hub.docker.com/r/vh13294/cryptomator-synology
+## Available Tags
 
-In Synology NAS
+| Tag | Vault Format |
+|-----|-------------|
+| `cryptomator-synology:vault-format-8` | Format 8 (current) |
+| `cryptomator-synology:vault-format-7` | Format 7 (legacy) |
 
-- Volume
+## Setup in Synology NAS
 
-  - Folder: cryptomatorDir -> MountPath: /cryptomatorDir
+### Volume
 
-- Port Setting
+| Folder | Mount Path |
+|--------|-----------|
+| `cryptomatorDir` | `/cryptomatorDir` |
 
-  - Local: 8181 -> Container: 8181
+### Port
 
-- Environment
-  - TIMEOUT: 2h (server will shutdown after 2h of running)
-  - TIMEOUT: 0 (disable timeout and server will run indefinitely)
-  - VAULT_NAME: demoVault
-  - VAULT_PATH: /cryptomatorDir
-  - VAULT_PASS: password
-  - CRYPTOMATOR_PORT: 8181
+| Local | Container |
+|-------|-----------|
+| `8181` | `8181` |
 
-In your WebDav client (guest account, no username/password)
+### Environment Variables
 
-- Mounted URL:
-  - 192.168.20.200:8181/demoVault
+| Variable | Example | Description |
+|----------|---------|-------------|
+| `VAULT_NAME` | `demoVault` | Name of your vault |
+| `VAULT_PATH` | `/cryptomatorDir` | Path where the vault folder lives |
+| `VAULT_PASS` | `password` | Vault password |
+| `CRYPTOMATOR_PORT` | `8181` | Port to serve WebDAV on |
+| `TIMEOUT` | `2h` | Auto-shutdown after this duration (`0` to disable) |
 
-(Assuming 192.168.20.200 is your NAS IP)
+## Connecting via WebDAV
 
-You can also mount WebDav as remote connect in synology file station.
+Access the vault from any WebDAV client (no username or password required):
 
-[File Station] -> [Tools] -> [Remote Connection] -> [Connection Setup] -> [WebDav]
+```
+http://192.168.20.200:8181/demoVault
+```
 
-Hostname will be 'localhost' or '127.0.0.1'
+> Replace `192.168.20.200` with your NAS IP address.
+
+## Mounting in Synology File Station
+
+You can also mount the vault as a remote connection directly inside File Station:
+
+**File Station** → **Tools** → **Remote Connection** → **Connection Setup** → **WebDAV**
+
+Use `localhost` or `127.0.0.1` as the hostname when connecting from within the NAS.
