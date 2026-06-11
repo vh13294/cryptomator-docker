@@ -1,0 +1,13 @@
+services:
+  cryptomator:
+    build: .
+    environment:
+      TIMEOUT: "2h"
+      VAULT_PATH: "/home/demoVault"
+      VAULT_NAME: "demoVault"
+      VAULT_PASS: "A1b2c3d4"
+      VAULT_PORT: "8181"
+    ports:
+      - "0.0.0.0:8181:8181"
+    volumes:
+      - "./demoVault:/home/demoVault" 

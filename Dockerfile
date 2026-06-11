@@ -1,21 +1,48 @@
-FROM openjdk:17-slim
-# FROM openjdk:11-jre-slim
-# JDK could bloat the image size, only need JRE. But there is no 17-jre build
-
+FROM debian:stable-slim
 
 ENV TIMEOUT 2h
-ENV VAULT_NAME demoVault
 ENV VAULT_PATH /cryptomatorDir
+ENV VAULT_NAME demoVault
 ENV VAULT_PASS password
-ENV CRYPTOMATOR_PORT 8181
+ENV VAULT_PORT 8181
 
-EXPOSE 8181
+RUN apt-get update --fix-missing && \
+    apt-get install -y --no-install-recommends \
+    ca-certificates \
+    curl \
+    unzip && \
+    update-ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
 
-COPY cryptomator-cli-0.5.1.jar /usr/local/bin/cryptomator-cli.jar
+# Declare TARGETARCH as an ARG in this stage to make it available
+ARG TARGETARCH
 
-COPY boot.sh /usr/local/bin/boot.sh
+# Define the base URL for your binary downloads
+ENV BASE_DOWNLOAD_URL="https://github.com/cryptomator/cli/releases/download/0.6.2/cryptomator-cli-0.6.2-linux"
+
+# Construct the download URL based on TARGETARCH
+# We use a case statement for more complex mapping if needed,
+# or direct concatenation if the architecture name matches the URL suffix.
+RUN case "${TARGETARCH}" in \
+    amd64) \
+        DOWNLOAD_SUFFIX="x64"; \
+        ;; \
+    arm64) \
+        DOWNLOAD_SUFFIX="aarch64"; \
+        ;; \
+    *) \
+        echo "Unsupported architecture: ${TARGETARCH}"; \
+        exit 1; \
+        ;; \
+    esac && \
+    curl -L "${BASE_DOWNLOAD_URL}-${DOWNLOAD_SUFFIX}.zip" --output /home/cryptomator-cli.zip && \
+    unzip /home/cryptomator-cli.zip -d /home
+
+COPY ./boot.sh /usr/local/bin/boot.sh
 # change permission
 RUN chmod +x /usr/local/bin/boot.sh
+
+EXPOSE ${VAULT_PORT}
 
 # run at startup
 CMD timeout $TIMEOUT /usr/local/bin/boot.sh
