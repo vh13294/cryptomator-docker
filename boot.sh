@@ -1,4 +1,8 @@
 #!/bin/bash
-java -jar /usr/local/bin/cryptomator-cli.jar \
-    --vault $VAULT_NAME=$VAULT_PATH --password $VAULT_NAME=$VAULT_PASS \
-    --bind 0.0.0.0 --port $CRYPTOMATOR_PORT
+echo "$VAULT_PASS" | /usr/local/bin/cryptomator-cli unlock \
+    --password:stdin \
+    --mounter=org.cryptomator.frontend.webdav.mount.FallbackMounter \
+    --loopbackHostName=0.0.0.0 \
+    --loopbackPort=$CRYPTOMATOR_PORT \
+    --mountPoint=/tmp/vault-mount \
+    "$VAULT_PATH/$VAULT_NAME"
