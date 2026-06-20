@@ -11,6 +11,29 @@ Mount a Cryptomator vault directly on your Synology NAS and access it over WebDA
 | `cryptomator-synology:vault-format-8` | Format 8 (current) |
 | `cryptomator-synology:vault-format-7` | Format 7 (legacy) |
 
+## Quick Start (Demo)
+
+A pre-built demo vault is included in the `demo/` folder. Run it locally to try the setup:
+
+```bash
+docker run -d \
+  -v "$(pwd)/demo:/cryptomatorDir/demo" \
+  -p 8181:8181 \
+  -e VAULT_NAME=demo \
+  -e VAULT_PASS=123456789 \
+  -e CRYPTOMATOR_PORT=8181 \
+  -e TIMEOUT=0 \
+  vh13294/cryptomator-synology:vault-format-8
+```
+
+Then access the vault at:
+
+```
+http://192.168.x.x:8181/demo
+```
+
+> Replace `192.168.x.x` with your machine's LAN IP address.
+
 ## Setup in Synology NAS
 
 ### Volume
