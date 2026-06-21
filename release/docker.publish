@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+
+IMAGE=vh13294/cryptomator-synology
+VERSION=0.6.2
+
+docker build --platform linux/amd64 -t $IMAGE:$VERSION .
+
+docker tag $IMAGE:$VERSION $IMAGE:vault-format-8
+docker tag $IMAGE:$VERSION $IMAGE:latest
+
+docker push $IMAGE:$VERSION
+docker push $IMAGE:vault-format-8
+docker push $IMAGE:latest
