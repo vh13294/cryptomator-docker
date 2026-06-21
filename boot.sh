@@ -52,7 +52,7 @@ http {
         listen $CRYPTOMATOR_PORT;
         location / {
             proxy_pass http://127.0.0.1:$INTERNAL_PORT/$VAULT_UUID/;
-            proxy_set_header Host \$host;
+            proxy_set_header Host \$http_host;
             proxy_request_buffering off;
             proxy_max_temp_file_size 0;
             client_max_body_size 0;

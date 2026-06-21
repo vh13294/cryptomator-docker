@@ -44,11 +44,11 @@ Mount your vault folder directly to `/cryptomatorDir`:
 |-----------|-----------|
 | `/volume1/.../myVault` | `/cryptomatorDir` |
 
-### Port
+### Network
 
-| Local | Container |
-|-------|-----------|
-| `8181` | `8181` |
+Set the network mode to **host**. This allows File Station to connect via `localhost` and removes the need for port mapping.
+
+> In bridge mode, Synology cannot reach its own container IP from File Station due to hairpin NAT limitations.
 
 ### Environment Variables
 
@@ -85,4 +85,4 @@ You can also mount the vault as a remote connection directly inside File Station
 
 **File Station** → **Tools** → **Remote Connection** → **Connection Setup** → **WebDAV**
 
-Use `localhost` or `127.0.0.1` as the hostname when connecting from within the NAS.
+With host network mode, use `localhost` or `127.0.0.1` as the hostname and your configured port (e.g., `8181`).
