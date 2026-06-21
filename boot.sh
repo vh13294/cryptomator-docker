@@ -54,10 +54,11 @@ http {
             proxy_pass http://127.0.0.1:$INTERNAL_PORT/$VAULT_UUID/;
             proxy_set_header Host \$host;
             proxy_request_buffering off;
+            proxy_max_temp_file_size 0;
             client_max_body_size 0;
             sub_filter "/$VAULT_UUID/" "/";
             sub_filter_once off;
-            sub_filter_types *;
+            sub_filter_types text/xml application/xml;
         }
     }
 }
