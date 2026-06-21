@@ -18,9 +18,8 @@ To test changes before pushing, build and run the image locally:
 ```bash
 docker build -t cryptomator-synology:local . && \
 docker run --rm \
-  -v "$(pwd)/demo:/cryptomatorDir/demo" \
+  -v "$(pwd)/demo:/cryptomatorDir" \
   -p 8181:8181 \
-  -e VAULT_NAME=demo \
   -e VAULT_PASS=123456789 \
   -e CRYPTOMATOR_PORT=8181 \
   -e TIMEOUT=0 \
@@ -39,9 +38,11 @@ http://192.168.x.x:8181/
 
 ### Volume
 
-| Folder | Mount Path |
-|--------|-----------|
-| `cryptomatorDir` | `/cryptomatorDir` |
+Mount your vault folder directly to `/cryptomatorDir`:
+
+| Host Path | Mount Path |
+|-----------|-----------|
+| `/volume1/.../myVault` | `/cryptomatorDir` |
 
 ### Port
 
@@ -53,8 +54,7 @@ http://192.168.x.x:8181/
 
 | Variable | Example | Description |
 |----------|---------|-------------|
-| `VAULT_NAME` | `demoVault` | Name of your vault |
-| `VAULT_PATH` | `/cryptomatorDir` | Path where the vault folder lives |
+| `VAULT_PATH` | `/cryptomatorDir` | Path where the vault is mounted (default, no change needed) |
 | `VAULT_PASS` | `password` | Vault password |
 | `CRYPTOMATOR_PORT` | `8181` | Port to serve WebDAV on |
 | `TIMEOUT` | `2h` | Auto-shutdown after this duration (`0` to disable) |

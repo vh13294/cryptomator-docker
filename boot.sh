@@ -20,7 +20,7 @@ echo "$VAULT_PASS" | /usr/local/bin/cryptomator-cli unlock \
     --password:stdin \
     --mounter=org.cryptomator.frontend.webdav.mount.FallbackMounter \
     --loopbackPort=$INTERNAL_PORT \
-    "$VAULT_PATH/$VAULT_NAME" > "$TMPLOG" 2>&1 &
+    "$VAULT_PATH" > "$TMPLOG" 2>&1 &
 CRYPTO_PID=$!
 
 # Stream logs to stdout so docker logs works

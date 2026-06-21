@@ -1,7 +1,6 @@
 FROM debian:12-slim
 
 ENV TIMEOUT=2h
-ENV VAULT_NAME=demoVault
 ENV VAULT_PATH=/cryptomatorDir
 ENV VAULT_PASS=password
 ENV CRYPTOMATOR_PORT=8181
