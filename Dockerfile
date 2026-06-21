@@ -6,7 +6,7 @@ ENV VAULT_PATH=/cryptomatorDir
 ENV VAULT_PASS=password
 ENV CRYPTOMATOR_PORT=8181
 
-RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl unzip socat \
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl unzip nginx \
     && curl -L https://github.com/cryptomator/cli/releases/download/0.6.2/cryptomator-cli-0.6.2-linux-x64.zip -o /tmp/cli.zip \
     && unzip /tmp/cli.zip -d /tmp/cli \
     && mv /tmp/cli/cryptomator-cli /opt/cryptomator-cli \

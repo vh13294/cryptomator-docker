@@ -30,7 +30,7 @@ docker run --rm \
 Then access the vault at:
 
 ```
-http://192.168.x.x:8181/demo
+http://192.168.x.x:8181/
 ```
 
 > Replace `192.168.x.x` with your machine's LAN IP address.
@@ -64,10 +64,20 @@ http://192.168.x.x:8181/demo
 Access the vault from any WebDAV client (no username or password required):
 
 ```
-http://192.168.20.200:8181/demoVault
+http://192.168.20.200:8181/
 ```
 
 > Replace `192.168.20.200` with your NAS IP address.
+
+## Mounting with RaiDrive (Windows)
+
+1. Open RaiDrive → **Add Drive** → **NAS** → **WebDAV**
+2. Set the **Address** field to: `192.168.20.200:8181` (your NAS IP and port)
+3. Set the **Path** field to: `/` (root — the vault is served at root, not a sub-path)
+4. Leave **Username** and **Password** empty
+5. Make sure **SSL** is **off** (HTTP, not HTTPS)
+
+> If RaiDrive has a single URL field instead of separate address/path fields, enter the full URL: `http://192.168.20.200:8181/`
 
 ## Mounting in Synology File Station
 
