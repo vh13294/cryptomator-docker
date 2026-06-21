@@ -48,11 +48,24 @@ echo "WebDAV accessible at: http://0.0.0.0:$CRYPTOMATOR_PORT/"
 cat > /tmp/cryptomator-nginx.conf << EOF
 events {}
 http {
+    # Rewrite Destination header for COPY/MOVE: strip scheme+host, prepend UUID path.
+    # Handles both http and https (e.g. when this container sits behind a TLS proxy).
+    map \$http_destination \$webdav_dest {
+        ~*^https?://[^/]+(/.+)$ "http://127.0.0.1:$INTERNAL_PORT/$VAULT_UUID\$1";
+        default "";
+    }
+
     server {
         listen $CRYPTOMATOR_PORT;
         location / {
             proxy_pass http://127.0.0.1:$INTERNAL_PORT/$VAULT_UUID/;
+            proxy_http_version 1.1;
+            proxy_set_header Connection "";
             proxy_set_header Host \$http_host;
+            proxy_set_header X-Real-IP \$remote_addr;
+            proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto \$scheme;
+            proxy_set_header Destination \$webdav_dest;
             proxy_request_buffering off;
             proxy_max_temp_file_size 0;
             client_max_body_size 0;
